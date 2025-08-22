@@ -1,0 +1,42 @@
+---
+const { title = 'Portfolio', description = 'Engineer Portfolio' } = Astro.props;
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      :root{--bg:#0b1020;--text:#eaf0ff;--panel:#141b2f}
+      *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
+      header,footer{background:#0f1730}
+      .container{width:min(1100px,92%);margin:0 auto}
+      nav a{color:#8ab4ff;text-decoration:none;margin-left:16px}
+      .content{padding:32px 0 64px}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
+        <a href="/" style="font-weight:800;letter-spacing:.4px;color:#8ab4ff;text-decoration:none">My Portfolio</a>
+        <nav>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <a href="https://github.com/nako170148" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container content">
+      <slot />
+    </main>
+
+    <footer>
+      <div class="container" style="padding:24px 0;color:#9fb0d3;">
+        © {new Date().getFullYear()} Your Name
+      </div>
+    </footer>
+  </body>
+</html>
