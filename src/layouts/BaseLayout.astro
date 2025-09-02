@@ -9,18 +9,64 @@ const { title = 'Portfolio', description = 'Engineer Portfolio' } = Astro.props;
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
     <style>
-      :root{--bg:#0b1020;--text:#eaf0ff;--panel:#141b2f}
-      *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
-      header,footer{background:#0f1730}
+      /* === White & Gray theme === */
+      :root{
+        --bg:#ffffff;         /* ページ背景 白 */
+        --text:#1f2937;       /* 文字色 (gray-800) */
+        --muted:#6b7280;      /* 補助文字色 (gray-500/600) */
+        --panel:#f7f7f8;      /* カード/セクション 背景 */
+        --line:#d1d5db;       /* 境界線 (gray-200) */
+        --link:#4b5563;       /* リンク色 */
+        --link-hover:#111827; /* リンクhover */
+        --header-footer:#e5e7eb; /* header/footer グレー背景 (gray-100) */
+      }
+
+      *{box-sizing:border-box}
+      body{
+        margin:0;
+        background:var(--bg);
+        color:var(--text);
+        font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+        line-height:1.65;
+      }
+
       .container{width:min(1100px,92%);margin:0 auto}
-      nav a{color:#8ab4ff;text-decoration:none;margin-left:16px}
       .content{padding:32px 0 64px}
+
+      header, footer{
+        background:var(--header-footer);
+        color:var(--text);
+        border-bottom:1px solid var(--line);
+      }
+      footer{
+        border-top:1px solid var(--line);
+        border-bottom:none;
+        color:var(--muted);
+      }
+
+      a{color:var(--link);text-decoration:none}
+      a:hover{color:var(--link-hover)}
+
+      nav a{margin-left:16px}
+
+      h1,h2,h3{color:#374151}
+      h2{font-size:1.25rem;margin:0 0 .5rem}
+      section + section{margin-top:2rem}
+
+      .card{
+        background:var(--panel);
+        border:1px solid var(--line);
+        border-radius:12px;
+        padding:24px;
+      }
+
+      .muted{color:var(--muted)}
     </style>
   </head>
   <body>
     <header>
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
-        <a href="/" style="font-weight:800;letter-spacing:.4px;color:#8ab4ff;text-decoration:none">My Portfolio</a>
+        <a href="/" style="font-weight:800;letter-spacing:.4px;color:var(--link-hover);text-decoration:none">My Portfolio</a>
         <nav>
           <a href="/projects">Works</a>
           <a href="/about">About</a>
@@ -34,7 +80,7 @@ const { title = 'Portfolio', description = 'Engineer Portfolio' } = Astro.props;
     </main>
 
     <footer>
-      <div class="container" style="padding:24px 0;color:#9fb0d3;">
+      <div class="container" style="padding:24px 0;">
         © {new Date().getFullYear()} Yui Nagano
       </div>
     </footer>

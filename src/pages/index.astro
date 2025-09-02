@@ -1,26 +1,44 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Portfolio | Yui Nagano" description="自己紹介">
-  <main class="container" style="padding: 10px 0;">
-    <h1>Portfolio</h1>
-    <h2>Infomation</h2>
-    <strong>長野 由依(Yui Nagano)</strong><br /><br />
-    筑波大学 情報学群情報メディア創成学類 B3
+  <main class="container" style="padding: 5px 0;">
+    <h1 style="font-size:2rem; font-weight:bold; margin-bottom:1.5rem;">Portfolio</h1>
 
-    <h2>Affiliations</h2>
-    <ul>
-      <li>筑波大学 宿舎祭実行委員</li>
-      <li>Realjam(筑波大学ダンスサークル)</li>
-    </ul>
+    <section class="card">
+      <h2>Infomation</h2>
+      <p>
+        <strong>長野 由依 (Yui Nagano)</strong><br /><br />
+        筑波大学 情報学群情報メディア創成学類 B3
+      </p>
+    </section>
 
-    <h2>Accounts</h2>
-    <ul>
-      <li><a href="https://github.com/nako170148" target="_blank">GitHub</a></li>
-    </ul>
+    <section class="card">
+      <h2>Affiliations</h2>
+      <ul>
+        <li>
+          筑波大学 宿舎祭実行委員
+        <a href="https://yadokarisai.com/" target="_blank" rel="noopener noreferrer">HP</a>
+        </li>
+        <li>
+          Realjam (筑波大学ダンスサークル)
+        <a href="https://www.instagram.com/realjam.tkb/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </li>
+      </ul>
+    </section>
 
-    <h2>Contact</h2>
-    <ul>yui.nako1205@gmail.com</ul>
+    <section class="card">
+      <h2>Accounts</h2>
+      <ul>
+        <li><a href="https://github.com/nako170148" target="_blank">GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Contact</h2>
+      <p><a href="mailto:yui.nako1205@gmail.com">yui.nako1205@gmail.com</a></p>
+    </section>
   </main>
 </BaseLayout>
