@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+let projects: CollectionEntry<"projects">[] = await getCollection("projects");
+
+// 並び順: order -> date(新しい順) -> title
+projects = projects.sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => {
+    const ao = a.data.order ?? Infinity;
+    const bo = b.data.order ?? Infinity;
+    if (ao !== bo) return ao - bo;
+
+    const ad = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const bd = b.data.date ? new Date(b.data.date).getTime() : 0;
+    if (ad !== bd) return bd - ad;
+
+    return a.data.title.localeCompare(b.data.title, "ja");
+  }
+);
+---
+
+<BaseLayout title="Works | Yui Nagano" description="制作物一覧">
+  <main class="container" style="padding: 24px 0;">
+    <h1>Works</h1>
+    <p>過去に制作した作品や現在取り組み中の作品です。</p>
+
+    <div class="grid">
+      {
+        projects.map((item) => (
+          <article class="card">
+            {item.data.image && (
+              <img src={item.data.image} alt={item.data.title} loading="lazy" />
+            )}
+            <div class="body">
+              <h2>{item.data.title}</h2>
+
+              {Array.isArray(item.data.tags) && item.data.tags.length > 0 && (
+                <ul class="tags">
+                  {item.data.tags.map((t:string) => <li>{t}</li>)}
+                </ul>
+              )}
+
+              {item.data.description && <p>{item.data.description}</p>}
+
+              <div class="links">
+                {item.data.github && (
+                  <a href={item.data.github} target="_blank" rel="noopener">GitHub</a>
+                )}
+                {item.data.demo && (
+                  <a href={item.data.demo} target="_blank" rel="noopener">Demo</a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      transition: transform .1s ease, box-shadow .1s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .body { padding: 14px; display: grid; gap: 8px; }
+    h2 { font-size: 1.1rem; margin: 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+    .tags li { font-size: .75rem; background: #f3f4f6; border-radius: 9999px; padding: 2px 8px; }
+    .links { display: flex; gap: 12px; }
+    .links a { text-decoration: underline; }
+    @media (prefers-color-scheme: dark) {
+      .card { background: #0b0b0c; border-color: #2a2a2a; }
+      .tags li { background: #1d1d1f; }
+    }
+  </style>
+</BaseLayout>
